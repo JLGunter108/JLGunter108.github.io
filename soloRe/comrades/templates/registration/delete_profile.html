@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}
+    Delete {{ user.username }}
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+{% if request.user.id == user.id %}
+    <h1 style="animation: flicker 2.3s infinite alternate; font-family: 'Pacifico';">Delete {{ user.username }}</h1>
+    <br><br>
+    <div class="">
+        <div class="form-group">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h4>Confirm Deletion</h4><br>
+                <button class="btn btn-secondary">Delete Profile</button>
+            </form>
+        </div>
+    </div>
+{% endif %}
+{% endif %}
+{% endblock %}

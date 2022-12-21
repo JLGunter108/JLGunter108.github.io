@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}
+    Edit {{ post.title }}
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    <h1 style="animation: flicker 2.3s infinite alternate; font-family: 'Pacifico';">Edit {{ post.title }}</h1>
+    <br><br>
+    <img style="max-width:100%;" src="{{ post.file.url }}" alt="post"><br>
+    <div class="">
+        <div class="form-group">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn btn-secondary">Post</button>
+                <br><br>
+                <a class="btn btn-danger" href="{% url 'delete_post' post.pk %}">Delete</a>
+            </form>
+        </div>
+    </div>
+{% endif %}
+{% endblock %}

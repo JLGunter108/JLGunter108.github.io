@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}
+Login
+{% endblock %}
+
+{% block content %}
+<h1 style="animation: flicker 2.3s infinite alternate; font-family: 'Pacifico';">Login</h1>
+<br>
+<div class="">
+    <div class="form-group">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <br>
+            <button class="btn btn-secondary">Login</button>
+        </form>
+    </div>
+    <br>
+    <h3>First Time?</h3>
+    <a class="btn btn-secondary" href="{% url 'register' %}">Register</a>
+</div><br><br>
+{% endblock %}

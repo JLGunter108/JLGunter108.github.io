@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}
+Edit Information
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+{% if request.user.id == user.id %}
+<h1 style="animation: flicker 2.3s infinite alternate; font-family: 'Pacifico';">Edit Information</h1>
+<br><br>
+<div class="">
+    <div class="form-group">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-secondary">Save Changes</button>
+        </form><br>
+        <form action="{% url 'delete_profile' user.pk %}" method="POST">
+            {% csrf_token %}
+            <button class="btn btn-danger btn-sm" type="submit" name="user_id" value="{{ user.id }}">Delete</button><br><br>
+        </form>
+    </div>
+    <a class="btn btn-danger btn-sm" href="{% url 'change_password' %}">Change Password</a>
+</div>
+{% endif %}
+{% endif %}
+<script>
+    var email = "{{ user.email }}";
+    document.getElementById('id_email').value = email;
+</script>
+{% endblock %}
