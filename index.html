@@ -14,22 +14,22 @@
     <br><br><br>
 
     <div class="container">
-        <h2 class="d-block text-center">Currency Converter</h2>
-        <div class="d-block">
-            <div class="col">
-                <select class="row currency">
+        <h2 class="text-center mb-3">Currency Converter</h2>
+        <div class="row justify-content-between mb-3">
+            <div class="col-5">
+                <select class="form-control currency">
                     <option>Select</option>
                 </select>
-                <input type="text" class="row" id="input_currency">
+                <input type="text" class="form-control" id="input_currency">
             </div>
-            <div class="col">
-                <select class="row currency">
+            <div class="col-5">
+                <select class="form-control currency">
                     <option>Select</option>
                 </select>
-                <input type="text" class="row" id="output_currency" disabled>
+                <input type="text" class="form-control" id="output_currency" readonly>
             </div>
         </div>
-        <button type="button" class="btn btn-success d-block">Success</button>
+        <button type="button" class="btn btn-success">Success</button>
     </div>
 <script src="script.js"></script>
 </body>
