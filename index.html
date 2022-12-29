@@ -32,9 +32,9 @@
         <button type="button" class="btn btn-success align-self-center" onclick="converter()">Convert</button>
     </div>
 <script>
-    var select = Document.querySelectorAll('#currency'),
-    input_currency = Document.getElementByID('input_currency'),
-    output_currency = Document.getElementByID('output_currency');
+    var select = document.querySelectorAll('#currency'),
+    input_currency = document.getElementByID('input_currency'),
+    output_currency = document.getElementByID('output_currency');
     
     const host = 'api.frankfurter.app';
     fetch(`https://${host}/currencies`)
@@ -53,7 +53,7 @@
             .then((val) => {
                 output_currency.value = Object.values(val.rates[0]);
             });
-    }
+        }
 </script>
 </body>
 </html>
