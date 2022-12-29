@@ -11,20 +11,23 @@
 <body class="bg-dark text-white">
     <h1 class="text-center">Small JS Projects</h1>
     <h6 class="text-center">by John Gunter</h6><br><br><br>
-    <div class="Container">
+    <div class="container d-flex flex-column">
         <h2 class="text-center">Currency Converter</h2>
-        <div class="col-4">
-            <select class="currency">
-                <option>Select</option>
-            </select>
-            <input type="text" id="input_currency">
+        <div class="row">
+            <div class="col-4">
+                <select class="currency">
+                    <option>Select</option>
+                </select>
+                <input type="text" id="input_currency">
+            </div>
+            <div class="col-4">
+                <select class="currency">
+                    <option>Select</option>
+                </select>
+                <input type="text" id="output_currency" disabled>
+            </div>
         </div>
-        <div class="col-4">
-            <select class="currency">
-                <option>Select</option>
-            </select>
-            <input type="text" id="output_currency" disabled>
-        </div>
+        <button type="button" class="btn btn-success">Success</button>
     </div>
 <script src="script.js"></script>
 </body>
