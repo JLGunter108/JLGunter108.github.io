@@ -7,7 +7,6 @@
     <title>New Project</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.7/dist/tailwind.min.css" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script src="./script.js"></script>
 </head>
 <body class="bg-gray-100">
 	<div class="container mx-auto max-w-md p-4">
@@ -24,8 +23,82 @@
 			</select>
 			<input type="number" id="to_amount" class="ml-4 flex-1 rounded-md border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:ring-opacity-50" placeholder="Amount" disabled>
 		</div>
-		<button id="convert_button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Convert</button>
 		<p id="error_message" class="text-red-500 mt-4"></p>
 	</div>
+    <script>
+        // API endpoint for retrieving currency data
+const API_URL = "https://api.exchangerate-api.com/v4/latest/";
+
+// Get input elements
+const fromCurrencyInput = document.getElementById("fromCurrency");
+const toCurrencyInput = document.getElementById("toCurrency");
+const amountInput = document.getElementById("amount");
+
+// Get result element
+const resultElement = document.getElementById("result");
+
+// Retrieve currency data from API and store in array
+let currencies = [];
+fetch(API_URL)
+  .then(response => response.json())
+  .then(data => {
+    currencies = Object.keys(data.rates);
+    displayCurrencies(currencies);
+  })
+  .catch(error => console.error("Error retrieving currency data:", error));
+
+// Display currency options in select elements
+function displayCurrencies(currencies) {
+  const selectElements = document.querySelectorAll("select");
+  selectElements.forEach(selectElement => {
+    currencies.forEach(currency => {
+      const optionElement = document.createElement("option");
+      optionElement.value = currency;
+      optionElement.textContent = currency;
+      selectElement.appendChild(optionElement);
+    });
+  });
+}
+
+// Convert currency based on input values
+function convertCurrency() {
+  const fromCurrency = fromCurrencyInput.value;
+  const toCurrency = toCurrencyInput.value;
+  const amount = amountInput.value;
+  
+  // Check that all input values are valid
+  if (fromCurrency === "" || toCurrency === "" || amount === "") {
+    resultElement.textContent = "Please enter all input values.";
+    return;
+  }
+  
+  // Perform currency conversion
+  const rate = getConversionRate(fromCurrency, toCurrency);
+  const convertedAmount = amount * rate;
+  
+  // Display converted amount
+  const resultText = `${amount} ${fromCurrency} = ${convertedAmount} ${toCurrency}`;
+  resultElement.textContent = resultText;
+}
+
+// Get conversion rate between two currencies
+function getConversionRate(fromCurrency, toCurrency) {
+  const apiEndpoint = `${API_URL}${fromCurrency}`;
+  return fetch(apiEndpoint)
+    .then(response => response.json())
+    .then(data => data.rates[toCurrency])
+    .catch(error => {
+      console.error("Error retrieving conversion rate:", error);
+      resultElement.textContent = "Error converting currency.";
+      throw error;
+    });
+}
+
+// Add event listeners to input elements
+fromCurrencyInput.addEventListener("change", convertCurrency);
+toCurrencyInput.addEventListener("change", convertCurrency);
+amountInput.addEventListener("input", convertCurrency);
+
+    </script>
 </body>
 </html>
