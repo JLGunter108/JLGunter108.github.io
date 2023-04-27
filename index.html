@@ -5,33 +5,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Project</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <script type="text/javascript" src="script.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.7/dist/tailwind.min.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="./script.js"></script>
 </head>
-<body class="bg-dark text-white">
-    <h1 class="text-center">Small JS Projects</h1>
-    <h6 class="text-center">by John Gunter</h6>
-    <br><br><br>
-
-    <div class="container">
-        <h2 class="text-center mb-3">Currency Converter</h2>
-        <div class="row justify-content-between mb-3">
-            <div class="col">
-            <select class="mb-2 col form-control currency">
-                <option>From</option>
-            </select>
-            <input type="text" class="mb-3 form-control" id="input_currency">
-            </div>
-            <div class="col">
-            <select class="mb-2 col form-control currency">
-                <option>To
-                </option>
-            </select>
-            <input type="text" class="mb-3 form-control" id="output_currency" readonly>
-            </div>
-        </div>
-        <button type="button" class="btn btn-success align-self-center" onclick="converter()">Convert</button>
-    </div>
+<body class="bg-gray-100">
+	<div class="container mx-auto max-w-md p-4">
+		<h1 class="text-3xl font-bold mb-4">Currency Converter</h1>
+		<div class="flex items-center mb-4">
+			<label for="from_currency" class="w-1/3 mr-4 font-medium text-gray-700">From:</label>
+			<select id="from_currency" class="w-2/3 rounded-md border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:ring-opacity-50">
+			</select>
+			<input type="number" id="from_amount" class="ml-4 flex-1 rounded-md border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:ring-opacity-50" placeholder="Amount">
+		</div>
+		<div class="flex items-center mb-4">
+			<label for="to_currency" class="w-1/3 mr-4 font-medium text-gray-700">To:</label>
+			<select id="to_currency" class="w-2/3 rounded-md border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:ring-opacity-50">
+			</select>
+			<input type="number" id="to_amount" class="ml-4 flex-1 rounded-md border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:ring-opacity-50" placeholder="Amount" disabled>
+		</div>
+		<button id="convert_button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Convert</button>
+		<p id="error_message" class="text-red-500 mt-4"></p>
+	</div>
 </body>
 </html>
